@@ -1,0 +1,20 @@
+Ronan Christie 
+How did recursive insertion work?
+What challenges did you face when finding the right spot for a new employee?
+When might trees be preferable to other data structures in real-world systems?
+
+Response - Recursive insertion is when a search is done by starting at the root which in a graph is the top 
+and it repeats checking left right is this the manager im looking for repeated until it finds the spot that needs an employee inserted
+in either left of right and then inserts them. It repeats the process of left right checking for finding a conditional and then continues until it
+has either found the manager in need or it reachs the route and there has been no found mention of the manager. Each call of the task is whats recursive.
+
+I was pretty lost when doing the spots for a new employee I like to be able to conceptualize the actual thing that is happening to find a condiition when doing 
+sorting alogrithms. Trees are something I havent done much with at all to be honest and I know they are very important for technical interviews so ive been practicing them on leetcode more.
+I also messed up when it was finding the correct manager and it wasnt stopping for when using the menu of the program running and that was bbecause I didnt gave a return true for the manager.
+I also had the search set to the root of the tree for the true when that same issue was happening which resulted in a repetitive searching of the entire tree.
+
+Trees are good when doing systems with heirachical data like a management system or a employee system for a school or military. The way other types of data are stored like lists
+its harder for a search to happen while trying to show relations without losing time on the programs speed because it either searchs through multiple data points or the entire list at once
+whereas a tree can do quicker relational connections with the data I believe AI is very very dense treed data with connections constantly running between them to make connections on how humans
+speak and logging the relations of how things are mentioned online with how they operate in the real world.
+

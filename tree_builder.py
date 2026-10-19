@@ -23,16 +23,91 @@ class TeamTree:
 
     '''
     
-    class
+    def __init__(self):
+        self.root = None
+
+    def insert(self, manager_name, employee_name, side, current_node=None):
+        # Empty tree
+        if self.root is None:
+            print("❌ No team lead yet. Add a team lead first.")
+            return False
+
+        # Start from root if not part of a recursive call
+        if current_node is None:
+            current_node = self.root
+
+        # Found the manager
+        if current_node.name == manager_name:
+            if side == "left" and current_node.left is None:
+                current_node.left = EmployeeNode(employee_name)
+                print(f"✅ {employee_name} added to the LEFT of {manager_name}")
+                return True
+            elif side == "right" and current_node.right is None:
+                current_node.right = EmployeeNode(employee_name)
+                print(f"✅ {employee_name} added to the RIGHT of {manager_name}")
+                return True
+            else:
+                print(f"❌ {manager_name} already has a {side} report.")
+                return True
+
+        # Search the subtrees
+        found_left = False
+        found_right = False
+
+        if current_node.left:
+            found_left = self.insert(manager_name, employee_name, side, current_node.left)
+
+        if current_node.right and not found_left:
+            found_right = self.insert(manager_name, employee_name, side, current_node.right)
+
+        # Manager not found
+        if not (found_left or found_right):
+            if current_node == self.root:
+                print(f"❌ Manager {manager_name} not found.")
+            return False
+
+        return True
+
+    def print_tree(self, node=None, level=0):
+        if node is None:
+            if level == 0:
+                node = self.root
+            else:  # Base case
+                return
+
+        indent = "    " * level
+        print(f"{indent}- {node.name}")
+
+        # Recursive cases
+        self.print_tree(node.left, level + 1)
+        self.print_tree(node.right, level + 1)
 
 # Test your code here
+# Step 2
+employee_1 = EmployeeNode("John")
+print(employee_1.name)   # John
+print(employee_1.left)   # None
+print(employee_1.right)  # None
 
+# Step 3
+company_directory = TeamTree()
+print(company_directory.root)  # None
 
+# Step 4
+company_directory.root = EmployeeNode("Ms. Manager")
+company_directory.insert("Ms. Manager", "Employee #1", "right")
+company_directory.insert("Ms. Manager", "Employee #2", "left")
+print(company_directory.root.right.name)  # Employee #1
+print(company_directory.root.left.name)   # Employee #2
 
-
-
-
-
+# Step 5
+company_directory = TeamTree()
+company_directory.root = EmployeeNode("Jordan")
+company_directory.insert("Jordan", "Taylor", "right")
+company_directory.insert("Jordan", "Riley", "left")
+company_directory.insert("Riley", "Dana", "right")
+company_directory.insert("Riley", "Morgan", "left")
+company_directory.print_tree()
 
 
 # CLI functionality
@@ -71,3 +146,5 @@ def company_directory():
             break
         else:
             print("❌ Invalid option. Try again.")
+
+company_directory()
